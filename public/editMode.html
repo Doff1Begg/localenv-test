@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Edit Mode</title>
+    <link rel="stylesheet" type="text/css" href="styles/global.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Limelight&family=Roboto:wght@100;400;500;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  </head>
+
+  <body>
+    <header class="header">
+      <img src="svg/logo.svg" alt="More Slides logo" id="headerLogo" />
+      <div>
+        <button class="btnGrey editIcon">
+          <img class="appIcon" src="svg/editIcon.svg" />
+        </button>
+        <button id="shareBtn" class="btnGreen shareBtn">
+          <img src="svg/lock.svg" title="Private" class="appIcon" />Share
+        </button>
+
+        <button class="selectBtn" id="userIcon">
+          u
+          <div class="selectOptions">
+            <p id="updatePassword">Update password</p>
+            <p id="logoutUser">Log out</p>
+            <hr />
+            <p id="deleteUser">Delete user</p>
+          </div>
+        </button>
+      </div>
+    </header>
+    <div class="editWrapper">
+      <a id="shareLink" href="#">Presentation is "PRIVATE"</a>
+      <div class="editActiveArea">
+        <div class="aspectRatio">
+          <div id="slideDiv" class="slideShowbodyDefault">
+            <a class="prev" onclick="navigate(-1)">&#8249;</a>
+            <div id="container" class="slideContent"></div>
+
+            <a class="next" onclick="navigate(1)">&#8250;</a>
+          </div>
+        </div>
+        <div id="navDots" style="text-align: center">
+          <span id="dot"></span>
+        </div>
+      </div>
+      <div class="editMenu">
+        <section class="menuSection">
+          <h2>Current Project:</h2>
+          <button class="selectBtn" id="selectBtn">
+            <span id="presTitleDisplay"></span
+            ><span class="dropdownArw" id="dropdownArw"></span>
+            <div id="presList" class="selectOptions"></div>
+          </button>
+
+          <button id="createPres" class="btnGreen" type="submit" value="submit">
+            Create New Presentation
+          </button>
+          <button id="deleteBtn" class="btnGrey deleteBtn">
+            Delete Presentation
+          </button>
+        </section>
+
+        <section class="menuSection">
+          <h2>Add A New Slide:</h2>
+          <button id="addTxt" class="btnGrey">Add Text Slide</button>
+
+          <button class="btnGrey" id="displayImg" onclick="">
+            Add Image Slide
+          </button>
+          <button id="addList" class="btnGrey">Add List Slide</button>
+
+          <button class="selectBtn" id="themeBtn">
+            Choose a theme<span class="dropdownArw" id="dropdownArw"></span>
+            <div class="selectOptions themes">
+              <p
+                class="themeOption"
+                id="default"
+                style="
+                  box-shadow: inset 0 0 0 2px #cadce0, inset 0 0 0 4px #15414b;
+                  background-color: #cadce0;
+                "
+              >
+                Minimalist
+              </p>
+              <p
+                class="themeOption"
+                id="sakura"
+                style="
+                  background-color: #ffc5cf;
+                  font-family: 'Courier New', Courier, monospace;
+                "
+              >
+                Sakura
+              </p>
+              <p
+                class="themeOption"
+                id="geometric"
+                style="
+                  font-family: 'Limelight', cursive;
+                  background-color: #1b202c;
+                  color: #ffc65c;
+                "
+              >
+                Geometric
+              </p>
+            </div>
+          </button>
+
+          <button class="btnGrey deleteBtn" id="deleteSlide">
+            Delete Current Slide
+          </button>
+        </section>
+        <section class="menuSection">
+          <button id="savePres" class="btnGreen" type="submit" value="submit">
+            Save Presentation
+          </button>
+          <button id="presentMode" class="btnGreen">
+            Presentation mode<img class="appIcon" src="svg/expand.svg" />
+          </button>
+        </section>
+      </div>
+    </div>
+
+    <div class="disableTotalScreen">
+      <div class="alert">
+        <p class="alertText">
+          You are not logged in, please log in to continue your editing.
+        </p>
+        <button id="alertBtn" class="btnGreen alertButton">Log in</button>
+      </div>
+    </div>
+
+    <div class="containerChooseImg">
+      <div class="chooseImg">
+        <img src="svg/x.svg" id="xIcon" />
+
+        <h3>Choose an image:</h3>
+        <section class="chooseimgsection">
+          <img class="imgOpt" src="./Bilder/shrine.jpg" />
+          <img class="imgOpt" src="./Bilder/wallOfChina.jpg" />
+          <img class="imgOpt" src="./Bilder/streetsOfJapan.jpg" />
+        </section>
+        <hr />
+        <section class="chooseimgsection">
+          <h3>or pick one of your own:</h3>
+          <input
+            type="file"
+            name="filename"
+            id="addImg"
+            class="btnGrey"
+            accept="image/png, image/jpeg"
+          />
+          <button id="addImgOk" class="btnGreen addImgOk">Add Image</button>
+        </section>
+      </div>
+    </div>
+    <script src="./js/globalVariables.js"></script>
+    <script src="./js/functionDeclarationsEditMode.js"></script>
+    <script src="./js/client.js"></script>
+  </body>
+</html>

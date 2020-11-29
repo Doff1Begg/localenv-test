@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Moreslides</title>
+    <link rel="stylesheet" href="./styles/global.css" type="text/css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div class="signupLoginWrapper">
+      <form method="post" id="loginForm">
+        <img src="svg/logo.svg" alt="More Slides logo" id="loginLogo" />
+        <input
+          id="username"
+          type="text"
+          name="user[username]"
+          placeholder="Enter E-mail"
+        />
+        <input
+          id="password"
+          type="password"
+          name="user[password]"
+          placeholder="Enter Password"
+        />
+        <button id="loginBtn" class="btnGreen" type="submit" value="Login">
+          Login
+        </button>
+        <button class="btnGrey" type="button">
+          <a href="signup.html">Sign Up</a>
+        </button>
+        <div class="responseFromServer"></div>
+      </form>
+    </div>
+    <script>
+      const loginForm = document.querySelector('#loginForm');
+      const responseDiv = document.querySelector('.responseFromServer');
+
+      document.querySelector('.btnGrey').addEventListener('click', () => {
+        location.href = 'signup.html';
+      });
+
+      loginForm.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const inputUsername = document.querySelector('#username').value;
+        const inputPassword = document.querySelector('#password').value;
+
+        const body = {
+          username: inputUsername,
+          password: inputPassword,
+          returnAccessToken: true,
+        };
+        const config = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(body),
+        };
+
+        fetch('/login', config)
+          .then((resp) => {
+            if (resp.status !== 200) {
+              throw new Error('Incorrect e-mail or password, try again.');
+            }
+            return resp.json();
+          })
+          .then((resp) => {
+            const accessData = JSON.stringify(resp);
+            localStorage.setItem('accessData', accessData);
+            location.href = 'editMode.html';
+          })
+          .catch((err) => {
+            responseDiv.textContent = '';
+            responseDiv.textContent = err.message;
+            return err;
+          });
+      });
+    </script>
+  </body>
+</html>
